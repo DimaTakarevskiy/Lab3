@@ -7,6 +7,7 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        System.out.println("Введите коэффициенты многочлена: ");
         String coef = scanner.nextLine();
         String[] coef2 = coef.split(" ");
         if (coef2.length==0) {

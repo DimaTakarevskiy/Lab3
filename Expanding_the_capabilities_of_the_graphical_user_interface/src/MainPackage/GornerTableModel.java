@@ -10,6 +10,8 @@ public class GornerTableModel extends AbstractTableModel {
     private Double _to;
     private Double _step;
 
+    private Double MainValue1 = 0d;
+    private Double MainValue2 = 0d;
 
 
 
@@ -64,11 +66,30 @@ public class GornerTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int column) {
         double x = _from + _step * row;
+        double MainValueColumn1 = _coefficients[0];
+        double MainValueColumn2 = 0;
 
         if(column == 0) {
             return x;
         }
-        return x;
+
+        if(column == 1){
+            for(int i = 1; i < _coefficients.length; i++){
+                MainValueColumn1 = _coefficients[i] + MainValueColumn1 * x;
+            }
+            MainValue1 = MainValueColumn1;
+            return MainValueColumn1;
+        }
+
+         if (column == 2){
+            for(int i = 0; i < _coefficients.length; i++){
+                MainValueColumn2+= (Math.pow(x, _coefficients.length - 1 - i) * _coefficients[i]);
+            }
+             MainValue2 = MainValueColumn2;
+            return MainValueColumn2;
+        }else{
+            return Math.abs(MainValue1 - MainValue2);
+        }
     }
 
 }
